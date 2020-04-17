@@ -4,30 +4,38 @@
       <el-aside width="200px">
         <!-- 用户信息 -->
         <div style="height:15%;" background-color="red"></div>
-        <el-menu @select="handleSelect" >
-          <el-menu-item index="1" class="nav-menu-item">
-            <i class="el-icon-setting"></i>
-            <span slot="title">首页</span>
+        <el-menu :router="true">
+          <el-menu-item index="/index">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span>首页</span>
+            </template>
           </el-menu-item>
-          <!-- <el-submenu index="1">
-            <template slot="title"> <i class="el-icon-menu"></i> 首页</template>
-          </el-submenu>-->
           <el-submenu index="2">
             <template slot="title">
               <i class="el-icon-message"></i>功能菜单
             </template>
-            <el-menu-item-group>
-              <el-menu-item index="1-1" to="../views/About.vue"
-                >功能菜单1</el-menu-item
-              >
-              <el-menu-item index="1-2">功能菜单2</el-menu-item>
-            </el-menu-item-group>
+            <!-- <router-link :to="{path: 'page1'}">功能菜单1</router-link> -->
+            <el-menu-item index="/page1">功能菜单1</el-menu-item>
+            <el-menu-item index="/page2">功能菜单2</el-menu-item>
           </el-submenu>
         </el-menu>
       </el-aside>
       <el-container>
-        <el-header>Header</el-header>
-        <el-main>Main</el-main>
+        <el-header>
+          <el-page-header @back="goBack" content="详情页面"></el-page-header>
+          <!-- <el-breadcrumb separator="/">
+            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/' }">    菜单功能  </el-breadcrumb-item>
+            <el-breadcrumb-item  :to="{ path: 'page1' }">活动列表</el-breadcrumb-item>
+            <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+          </el-breadcrumb>-->
+        </el-header>
+        <!--  -->
+        <el-main>
+          <router-view></router-view>
+        </el-main>
+        <!--  -->
         <el-footer>Footer</el-footer>
       </el-container>
     </el-container>
@@ -38,14 +46,16 @@
 export default {
   name: "Home",
   data() {
-
-   
+    return {
+      activeindex: "this.$router.path"
+    };
   },
-   methods: {
-      handleSelect() {
-        console.log("111");
-      }
-    }
+  methods: {
+    handleSelect() {
+      console.log("111");
+    },
+    goBack() {}
+  }
 };
 </script>
 <style scoped>
@@ -67,7 +77,7 @@ export default {
 }
 
 .el-aside {
-  background-color: #d3dce6;
+  background-color: #ffffff;
   color: #333;
   text-align: center;
   line-height: 200px;

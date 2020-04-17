@@ -38,7 +38,7 @@
 </template>
 <script>
 export default {
-  name: "about",
+  name: "login",
   data() {
     var validatePass = (rule, value, callback) => {
       if (value === "") {
